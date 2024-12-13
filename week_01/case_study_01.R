@@ -14,4 +14,4 @@ petal_length_mean <- mean(iris$Petal.Length)
 hist(iris$Petal.Length)
 
 ggplot() +
-geom_histogram(aes(iris$Petal.Length))
+geom_histogram(aes(iris$Petal.Length, color = iris$Petal.length))
