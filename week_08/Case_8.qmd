@@ -1,0 +1,48 @@
+---
+title: "Mauna Loa Observatory CO2 Annual Mean Data"
+author: "John Mernitz"
+format: html
+editor: visual
+format:
+  html: default
+  gfm: default
+  pptx: default
+  docx: default
+---
+
+```{r, message=FALSE, warning=FALSE, results=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(readr)
+library(knitr)
+library(kableExtra)
+library(quarto)
+getwd()
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, results=FALSE}
+url <- "ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_annmean_mlo.txt"
+
+co2_data <- read_table(url, skip = 54, col_names = c("Year", "Mean", "unc"))
+```
+
+
+
+```{r, message=FALSE, warning=FALSE}
+ggplot(co2_data, aes(x = Year, y = Mean)) +
+  geom_line(color = "orange", size = 2) +
+  labs(title = "Annual Mean CO2 Levels at Mauna Loa 1959-Present", 
+       x = "Year", 
+       y = "CO2 Concentration (ppm)") +
+  theme_minimal()
+```
+
+#Annual Mean CO2 Concentrations
+```{r}
+co2_data %>%
+  kable() %>%
+  kable_material(c("striped", "hover"))
+```
+
